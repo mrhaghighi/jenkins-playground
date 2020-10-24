@@ -44,8 +44,11 @@ pipeline {
         always {
             echo 'This will always run'
             
-            if (fileExists('build/reports/**/*.xml')) {
+            try {
                 junit 'build/reports/**/*.xml'
+            } catch (error) {
+                echo "JUnit failed!"
+                echo "Catch error: ${error}"
             }
         }
         success {
