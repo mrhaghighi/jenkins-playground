@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     checkout scm
-                    COMMIT_ID = GIT_COMMIT
+                    COMMIT_ID = GIT_COMMIT.substring(0, 6)
                     echo "Git commit id: ${COMMIT_ID}"
                 }
             }
