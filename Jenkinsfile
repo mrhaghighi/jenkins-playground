@@ -5,7 +5,7 @@ pipeline {
             sh 'echo "Hello World!"'
         }
 
-        satage('deploy') {
+        stage('deploy') {
             steps {
                 retry(3) {
                     sh 'echo "Trying..."'
