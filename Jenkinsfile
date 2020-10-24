@@ -16,8 +16,11 @@ pipeline {
             steps {
                 script {
                     checkout scm
-                    sh "git rev-parse --short HEAD > ./git/commit_id"
-                    COMMIT_ID = readFile('./git/commit_id').trim()
+                    COMMIT_ID = sh(
+                        script: "git rev-parse --short HEAD",
+                        returnStdout: true
+                    ).trim()
+                    echo "Git commit id: ${COMMIT_ID}"
                 }
             }
         }
