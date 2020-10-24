@@ -2,17 +2,17 @@ pipeline {
     agent any
     stages {
         stage('build') {
-            sh 'echo "Hello World!"'
+            echo "Hello World!"
         }
 
         stage('deploy') {
             steps {
                 retry(3) {
-                    sh 'echo "Trying..."'
+                    echo "Trying..."
                 }
 
                 timeout(time: 2, unit: 'MINUTES') {
-                    sh 'echo "Health check: OK"'
+                    echo "Health check: OK"
                 }
             }
         }
