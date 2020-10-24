@@ -5,6 +5,11 @@ pipeline {
         }
     }
 
+    environment {
+        USERNAME = 'mrh_haghighi'
+        PASSWORD = 'secret:)'
+    }
+
     stages {
         stage('build') {
             steps {
@@ -27,6 +32,10 @@ pipeline {
                 timeout(time: 2, unit: 'MINUTES') {
                     echo "Health check: OK"
                 }
+
+                echo "Your username is `${USERNAME}`"
+                echo "Your password is `${PASSWORD}`"
+                sh 'printenv'
             }
         }
     }
