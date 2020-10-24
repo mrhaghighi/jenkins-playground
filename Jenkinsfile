@@ -42,16 +42,14 @@ pipeline {
 
     post {
         always {
-            steps {
-                script {
-                    echo 'This will always run'
+            script {
+                echo 'This will always run'
 
-                    try {
-                        junit 'build/reports/**/*.xml'
-                    } catch (error) {
-                        echo "JUnit failed!"
-                        echo "Catch error: ${error}"
-                    }
+                try {
+                    junit 'build/reports/**/*.xml'
+                } catch (error) {
+                    echo "JUnit failed!"
+                    echo "Catch error: ${error}"
                 }
             }
         }
