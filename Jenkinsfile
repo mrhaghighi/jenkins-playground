@@ -50,6 +50,12 @@ pipeline {
                 sh 'printenv'
             }
         }
+
+        stage('docker build/push') {
+            docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                docker.build("mrhaghighi/jenkins-docker-example:${COMMIT_ID}", '.').push()
+            }
+        }
     }
 
     post {
