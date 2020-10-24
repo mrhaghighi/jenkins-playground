@@ -1,9 +1,9 @@
 pipeline {
-    // agent {
-    //     docker {
-    //         image 'node:15-alpine'
-    //     }
-    // }
+    agent {
+        docker {
+            image 'node:15-alpine'
+        }
+    }
 
     environment {
         USERNAME = 'mrh_haghighi'
