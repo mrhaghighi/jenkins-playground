@@ -16,10 +16,7 @@ pipeline {
             steps {
                 script {
                     checkout scm
-                    COMMIT_ID = sh(
-                        script: "git rev-parse --short HEAD",
-                        returnStdout: true
-                    ).trim()
+                    COMMIT_ID = ${GIT_COMMIT}
                     echo "Git commit id: ${COMMIT_ID}"
                 }
             }
