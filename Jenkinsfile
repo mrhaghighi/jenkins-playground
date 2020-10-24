@@ -54,7 +54,7 @@ pipeline {
         stage('docker build/push') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                    docker.withRegistry('https://id.docker.com', 'dockerhub') {
                         docker.build("mrhaghighi/jenkins-docker-example:${COMMIT_ID}", '.').push()
                     }
                 }
