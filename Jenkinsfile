@@ -76,7 +76,17 @@ pipeline {
             }
         }
         success {
-            echo 'This will run only if successful'
+            steps {
+                script {
+                    echo 'This will run only if successful'
+
+                    slackSend(
+                        channel: '#alerts',
+                        color: 'good',
+                        message: 'Everything is OK. Pipeline passed successfully :)'
+                    )
+                }
+            }
         }
         failure {
             echo 'This will run only if failed'
