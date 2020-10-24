@@ -1,6 +1,4 @@
 pipeline {
-    def commitId
-
     // agent {
     //     docker {
     //         image 'node:15-alpine'
@@ -10,13 +8,16 @@ pipeline {
     environment {
         USERNAME = 'mrh_haghighi'
         PASSWORD = 'secret:)'
+        COMMIT_ID = ''
     }
 
     stages {
         stage('preparation') {
-            checkout scm
-            sh "git rev-parse --short HEAD > ./git/commit_id"
-            commitId = readFile('./git/commit_id').trim()
+            script {
+                checkout scm
+                sh "git rev-parse --short HEAD > ./git/commit_id"
+                COMMIT_ID = readFile('./git/commit_id').trim()
+            }
         }
 
         stage('build') {
