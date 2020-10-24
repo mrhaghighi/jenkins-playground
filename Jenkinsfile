@@ -1,9 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:15-alpine'
-        }
-    }
+    def commitId
+
+    // agent {
+    //     docker {
+    //         image 'node:15-alpine'
+    //     }
+    // }
 
     environment {
         USERNAME = 'mrh_haghighi'
@@ -11,6 +13,12 @@ pipeline {
     }
 
     stages {
+        stage('preparation') {
+            checkout scm
+            sh "git rev-parse --short HEAD > ./git/commit_id"
+            commitId = readFile('./git/commit_id').trim()
+        }
+
         stage('build') {
             steps {
                 sh 'echo "Hello World!"'
@@ -18,8 +26,9 @@ pipeline {
         }
 
         stage('test') {
-            steps {
-                sh 'node --version'
+            nodejs(nodeJSInstallationName: 'nodejs') {
+                sh 'npm install --only=dev'
+                sh 'npm test'
             }
         }
 
