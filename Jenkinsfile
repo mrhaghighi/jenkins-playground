@@ -1,7 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'node:15-alpine'
+            // image 'node:15-alpine'
+            image 'docker:dind'
         }
     }
 
@@ -28,12 +29,12 @@ pipeline {
             }
         }
 
-        stage('test') {
-            steps {
-                sh 'npm install --only=dev'
-                sh 'npm test'
-            }
-        }
+        // stage('test') {
+        //     steps {
+        //         sh 'npm install --only=dev'
+        //         sh 'npm test'
+        //     }
+        // }
 
         stage('deploy') {
             steps {
